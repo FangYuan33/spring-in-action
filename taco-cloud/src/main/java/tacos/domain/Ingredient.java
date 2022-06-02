@@ -16,7 +16,7 @@ public class Ingredient {
     /**
      * 食材的种类
      */
-    public static enum Type {
+    public enum Type {
         WRAP,
         PROTEIN,
         VEGGIES,
