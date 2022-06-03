@@ -8,12 +8,14 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import tacos.domain.Order;
 
 import javax.validation.Valid;
 
 @Slf4j
 @Controller
+@SessionAttributes("order")
 @RequestMapping("/orders")
 public class OrderController {
 

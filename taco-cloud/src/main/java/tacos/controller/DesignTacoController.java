@@ -9,9 +9,11 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import tacos.domain.Ingredient;
 import tacos.domain.Taco;
 import tacos.repository.IngredientRepository;
+import tacos.repository.TacoRepository;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -20,8 +22,12 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
+@SessionAttributes("order")
 @RequestMapping("/design")
 public class DesignTacoController {
+
+    @Autowired
+    private TacoRepository tacoRepository;
 
     private final IngredientRepository ingredientRepository;
 
@@ -44,7 +50,8 @@ public class DesignTacoController {
             initialAndAddIngredientsToView(model);
             return "design";
         }
-        log.info(JSON.toJSONString(taco));
+        log.info("Save Taco Info: " + JSON.toJSONString(taco));
+        tacoRepository.save(taco);
 
         // 重定向，关于它的内容可看README
         return "redirect:/orders/current";
