@@ -14,3 +14,4 @@ spring:
     init:
       data-locations: classpath*:data.sql
       schema-locations: classpath*:schema.sql
+      mode: always
