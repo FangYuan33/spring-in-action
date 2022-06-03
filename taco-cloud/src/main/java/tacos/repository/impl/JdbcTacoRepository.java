@@ -19,17 +19,17 @@ public class JdbcTacoRepository implements TacoRepository {
 
     @Override
     public Taco save(Taco taco) {
-        long tacoId = saveTacoInfo(taco);
+        saveTacoInfo(taco);
 
         for (String ingredientId : taco.getIngredients()) {
-            saveIngredientToTaco(ingredientId, tacoId);
+            saveIngredientToTaco(ingredientId, taco.getId());
         }
 
         return taco;
     }
 
     @SuppressWarnings("all")
-    private long saveTacoInfo(Taco taco) {
+    private void saveTacoInfo(Taco taco) {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -42,7 +42,7 @@ public class JdbcTacoRepository implements TacoRepository {
             }
         }, keyHolder);
 
-        return keyHolder.getKey().longValue();
+        taco.setId(keyHolder.getKey().longValue());
     }
 
     private void saveIngredientToTaco(String ingredientId, long tacoId) {

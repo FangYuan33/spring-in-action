@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:/Users/wangyilong/GitHub/spring-in-action
+    url: jdbc:h2:mem:tacodb
     username: sa
     password:
   h2:
@@ -14,4 +14,4 @@ spring:
     init:
       data-locations: classpath*:data.sql
       schema-locations: classpath*:schema.sql
-      mode: never
+      mode: always
