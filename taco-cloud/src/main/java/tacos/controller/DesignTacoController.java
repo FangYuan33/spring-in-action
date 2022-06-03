@@ -23,6 +23,28 @@ public class DesignTacoController {
 
     @GetMapping
     public String showDesignForm(Model model) {
+        initialAndAddIngredientsToView(model);
+        model.addAttribute("taco", new Taco());
+
+        return "design";
+    }
+
+    @PostMapping
+    public String processDesign(@Valid Taco taco, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            initialAndAddIngredientsToView(model);
+            return "design";
+        }
+        log.info(JSON.toJSONString(taco));
+
+        // 重定向，关于它的内容可看README
+        return "redirect:/orders/current";
+    }
+
+    /**
+     * 初始化食材并添加供前端页面展示
+     */
+    private void initialAndAddIngredientsToView(Model model) {
         List<Ingredient> ingredients = Arrays.asList(
                 new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP),
                 new Ingredient("COTO", "Corn Tortilla", Ingredient.Type.WRAP),
@@ -41,10 +63,6 @@ public class DesignTacoController {
         for (Ingredient.Type typeValue : typeValues) {
             model.addAttribute(typeValue.toString().toLowerCase(), filterByType(ingredients, typeValue));
         }
-
-        model.addAttribute("design", new Taco());
-
-        return "design";
     }
 
     /**
@@ -52,16 +70,5 @@ public class DesignTacoController {
      */
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Ingredient.Type type) {
         return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
-    }
-
-    @PostMapping
-    public String processDesign(@Valid Taco design, Errors errors) {
-        if (errors.hasErrors()) {
-            return "design";
-        }
-        log.info(JSON.toJSONString(design));
-
-        // 重定向，关于它的内容可看README
-        return "redirect:/orders/current";
     }
 }
