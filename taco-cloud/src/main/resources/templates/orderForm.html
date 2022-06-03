@@ -23,11 +23,11 @@
 
       <h3>Deliver my taco masterpieces to...</h3>
       <label for="name">Name: </label>
-      <input type="text" th:field="*{name}"/>
+      <input type="text" th:field="*{orderName}"/>
 <!-- end::allButValidation[] -->
       <span class="validationError"
-            th:if="${#fields.hasErrors('name')}"
-            th:errors="*{name}">Name Error</span>
+            th:if="${#fields.hasErrors('orderName')}"
+            th:errors="*{orderName}">Name Error</span>
 <!-- tag::allButValidation[] -->
       <br/>
 
