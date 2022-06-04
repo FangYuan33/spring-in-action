@@ -2,8 +2,8 @@ delete from taco_order_tacos;
 delete from taco_ingredients;
 delete from taco;
 delete from taco_order;
-
 delete from ingredient;
+
 insert into ingredient (id, name, type)
                 values ('FLTO', 'Flour Tortilla', 'WRAP');
 insert into ingredient (id, name, type)
