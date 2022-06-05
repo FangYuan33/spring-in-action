@@ -32,6 +32,8 @@ public class Order {
 
     private LocalDateTime placedAt;
 
+    private Long userId;
+
     /**
      * 订单中保存多个taco
      */

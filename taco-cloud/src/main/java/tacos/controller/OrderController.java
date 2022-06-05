@@ -30,6 +30,8 @@ public class OrderController {
     }
 
     /**
+     * 添加参数 @AuthenticationPrincipal User user 也可以获取到user信息
+     *
      * @param order order对象可以从Session中获取到taco信息
      */
     @PostMapping

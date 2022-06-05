@@ -3,9 +3,11 @@ package tacos.repository.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import tacos.domain.Order;
 import tacos.domain.Taco;
+import tacos.domain.User;
 import tacos.repository.OrderRepository;
 
 import java.lang.reflect.Field;
@@ -36,6 +38,8 @@ public class JdbcOrderRepository implements OrderRepository {
     }
 
     private long saveOrder(Order order) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        order.setUserId(currentUser.getId());
         order.setPlacedAt(LocalDateTime.now());
         Map<String, Object> orderMap = objectToMap(order);
 
