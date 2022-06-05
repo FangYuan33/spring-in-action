@@ -20,16 +20,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
-
-    @Bean
-    protected PasswordEncoder passwordEncoder() {
-        return new StandardPasswordEncoder("53cr3t");
-    }
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 关闭csrf跨站请求伪造 需要校验的请求有/design /orders 其他的允许 成功默认跳转/design
         http.csrf().disable()
@@ -40,4 +30,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/design", true);
     }
 
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    protected PasswordEncoder passwordEncoder() {
+        return new StandardPasswordEncoder("53cr3t");
+    }
 }

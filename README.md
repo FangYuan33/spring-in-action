@@ -1,5 +1,21 @@
 ## Spring实战（第五版）学习笔记
 
+### chapter_04
+
+继承WebSecurityConfigurerAdapter实现自己的SpringSecurity配置，具体查看SecurityConfig类
+
+创建User实体类实现UserDetails接口，它提供了核心的用户信息，实现UserDetailService接口，重写方法之后，将它加入配置中能自动生效
+
+SecurityConfig中passwordEncoder()创建密码编码器的方法会生成一个bean被Spring管理起来，
+每次调用该方法时都会被Spring拦截，并返回该bean实例
+
+对于各种请求的安全配置则看SecurityConfig注释即可
+
+csrf: 跨站请求伪造，它会让用户在恶意的web页面上填写晰晰，然后将表单数据提交到另外一个应用上，因此可能会对用户造成损失。
+SpringSecurity提供了CSRF的保护，不过我们将它关闭了。
+
+Order中为了保存userId 写了两种方式，一是通过注解在Controller层直接在请求中拿到，另一种是通过SpringSecurity上下文进行获取。
+
 ### chapter_03
 
 http是无状态的协议，为了给它增加状态追踪，添加了cookie和Session的机制
