@@ -11,7 +11,6 @@ import tacos.domain.Ingredient;
 import tacos.domain.Order;
 import tacos.domain.Taco;
 import tacos.repository.IngredientRepository;
-import tacos.repository.TacoJPARepository;
 import tacos.repository.TacoRepository;
 
 import javax.validation.Valid;
@@ -35,10 +34,6 @@ public class DesignTacoController {
     public DesignTacoController(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
     }
-
-    // jpa
-    @Autowired
-    private TacoJPARepository tacoJPARepository;
 
     // 被@ModelAttribute注释的方法会在此controller的每个方法执行前被执行 ，如果有返回值，则自动将该返回值加入到ModelMap中
     // 搭配了@SessionAttributes 这样这个空order对象就会放到Session中，这样之后请求processDesign的时候会将order传入

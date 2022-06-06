@@ -1,5 +1,38 @@
 ## Spring实战（第五版）学习笔记
 
+### chapter_05
+如下配置虽然显式设置成了0，但是服务器并不会真的在端口0上启动，相反它会任选一个可用的端口
+![img_2.png](images/img_2.png)
+
+---
+
+要设置日志级别，我们可以创建以logging.level作为前缀的属性，随后接跟着的是我们想要设置日志级别的logger
+![img_3.png](images/img_3.png)
+
+是如何设置的JdbcTemplate的logger的呢？我们点进JdbcTemplate，发现它的logger在这
+![img_4.png](images/img_4.png)
+
+它属于它的父类
+
+![img.png](images/img_5.png)
+
+这个getClass()方法的值就是我们需要在log:level后配置的东西，如果不知道配置什么直接debug进来看
+
+---
+
+通过使用注解可以自定义自己的配置，如@ConfigurationProperties(prefix = "taco.design")，这个值可以随着我们的配置改变
+
+![img.png](images/img_6.png)
+![img_1.png](images/img_7.png)
+
+---
+
+profile: 可以配置不同的配置文件 application-{profile名字}.yaml
+
+之后在默认的yaml中可以配置生效的profile
+
+还可以根据@Profile注解条件创建bean
+
 ### chapter_04
 
 继承WebSecurityConfigurerAdapter实现自己的SpringSecurity配置，具体查看SecurityConfig类
@@ -21,7 +54,7 @@ Order中为了保存userId 写了两种方式，一是通过注解在Controller�
 http是无状态的协议，为了给它增加状态追踪，添加了cookie和Session的机制
 
 所谓Session，指的是客户端和服务端之间的状态信息（数据）；这个状态如何界定，生命期有多长，这是应用本身的事情，Session受控与服务端
-![img_1.png](img_1.png)
+![img_1.png](images/img_1.png)
 查看请求的时候可以发现SessionID
 
 Cookie则是存储在浏览器中，记录客户端与服务端之间的状态
@@ -50,7 +83,7 @@ Cookie则是存储在浏览器中，记录客户端与服务端之间的状态
 
 测试：code-nav.cn 可以发现下图中是301永久重定向，浏览器永久跳转到Location指定的url上。
 
-![img.png](img.png)
+![img.png](images/img.png)
 
 参考：[通俗讲解【重定向】及其实践](https://zhuanlan.zhihu.com/p/367927954)
 
