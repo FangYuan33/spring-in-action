@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    type: org.apache.commons.dbcp2.BasicDataSource
+    url: jdbc:mysql://localhost:3306/spring_in_action?useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: root
+    # 别把这个提交了
+    password: xxxx
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      data-locations: classpath*:data.sql
+      schema-locations: classpath*:schema.sql
+      mode: never
+  jpa:
+    open-in-view: false
