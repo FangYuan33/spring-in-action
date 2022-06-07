@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>taco-cloud</artifactId>
+        <groupId>tacos</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>taco-cloud-start</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>tacos</groupId>
+            <artifactId>taco-cloud-domain</artifactId>
+            <version>${taco-cloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tacos</groupId>
+            <artifactId>taco-cloud-data</artifactId>
+            <version>${taco-cloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tacos</groupId>
+            <artifactId>taco-cloud-security</artifactId>
+            <version>${taco-cloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tacos</groupId>
+            <artifactId>taco-cloud-api</artifactId>
+            <version>${taco-cloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tacos</groupId>
+            <artifactId>taco-cloud-ui</artifactId>
+            <version>${taco-cloud.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
