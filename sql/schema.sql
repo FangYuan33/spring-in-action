@@ -7,10 +7,10 @@ create table if not exists ingredient (
 
 create table if not exists taco (
     id bigint(20) not null auto_increment,
-    name varchar(50) not null,
-    createdAt timestamp not null,
+    name varchar(50) not null comment 'taco名',
+    created_at timestamp not null comment '创建时间',
     primary key (id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf6mb4;
 
 create table if not exists taco_ingredients (
     taco bigint not null,
