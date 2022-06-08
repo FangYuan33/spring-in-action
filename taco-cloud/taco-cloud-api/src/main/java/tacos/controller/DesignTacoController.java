@@ -1,68 +1,34 @@
 package tacos.controller;
 
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import tacos.domain.Ingredient;
-import tacos.domain.Order;
 import tacos.domain.Taco;
-import tacos.repository.IngredientRepository;
-import tacos.repository.TacoRepository;
+import tacos.repository.TacoJPARepository;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Controller
-@SessionAttributes("order")
+@RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/design")
 public class DesignTacoController {
 
     // jdbc
     @Autowired
-    private TacoRepository tacoRepository;
+    private TacoJPARepository tacoRepository;
 
-    private final IngredientRepository ingredientRepository;
+    @GetMapping("/recent")
+    public Iterable<Taco> recentTacos() {
+        PageRequest page = PageRequest.of(0, 12, Sort.by("createdAt").descending());
 
-    @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepository) {
-        this.ingredientRepository = ingredientRepository;
-    }
-
-    // 被@ModelAttribute注释的方法会在此controller的每个方法执行前被执行 ，如果有返回值，则自动将该返回值加入到ModelMap中
-    // 搭配了@SessionAttributes 这样这个空order对象就会放到Session中，这样之后请求processDesign的时候会将order传入
-    // 这样向order中添加taco信息即可在orderController中拿到
-    @ModelAttribute(name = "order")
-    private Order order() {
-        return new Order();
-    }
-
-    @GetMapping
-    public String showDesignForm(Model model) {
-        initialAndAddIngredientsToView(model);
-        model.addAttribute("taco", new Taco());
-
-        return "design";
-    }
-
-    @PostMapping
-    public String processDesign(@Valid Taco taco, Errors errors, Model model, @ModelAttribute Order order) {
-        if (errors.hasErrors()) {
-            initialAndAddIngredientsToView(model);
-            return "design";
-        }
-        log.info("Save Taco Info: " + JSON.toJSONString(taco));
-        Taco savedTaco = tacoRepository.save(taco);
-        order.addTaco(savedTaco);
-
-        // 重定向，关于它的内容可看README
-        return "redirect:/orders/current";
+        return tacoRepository.findAll(page).getContent();
     }
 
     /**
@@ -70,7 +36,7 @@ public class DesignTacoController {
      */
     private void initialAndAddIngredientsToView(Model model) {
         List<Ingredient> ingredients = new ArrayList<>();
-        ingredientRepository.findAll().forEach(ingredients::add);
+//        ingredientRepository.findAll().forEach(ingredients::add);
 
         // 根据食材种类分类之后添加到model中 以分类在前台页面展示
         Ingredient.Type[] typeValues = Ingredient.Type.values();

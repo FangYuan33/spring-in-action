@@ -16,12 +16,12 @@ import javax.validation.Valid;
  * 如果这个请求过来的时候，Session中没有携带order，那么会报错
  */
 @Slf4j
-@Controller
+
 @SessionAttributes("order")
 @RequestMapping("/orders")
 public class OrderController {
 
-    @Autowired
+
     private OrderRepository orderRepository;
 
     @GetMapping("/current")
