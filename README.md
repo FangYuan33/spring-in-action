@@ -1,5 +1,15 @@
 ## Spring实战（第五版）学习笔记
 
+### chapter_06
+
+---
+
+dependencyManagement元素提供了一种管理依赖版本号的方式。在dependencyManagement元素中声明所依赖的jar包的版本号等信息，
+那么所有子项目再次引入此依赖jar包时则无需显式的列出版本号。
+Maven会沿着父子层级向上寻找拥有dependencyManagement 元素的项目，然后使用它指定的版本号。
+
+dependencyManagement中定义的只是依赖的声明，并不实现引入，因此子项目需要显式的声明需要用的依赖。
+
 ### chapter_05
 如下配置虽然显式设置成了0，但是服务器并不会真的在端口0上启动，相反它会任选一个可用的端口
 ![img_2.png](images/img_2.png)
