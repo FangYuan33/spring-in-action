@@ -1,5 +1,7 @@
 package tacos.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/design")
+@Api(value = "Tacos设计控制器")
 public class DesignTacoController {
 
     // jdbc
@@ -25,6 +28,7 @@ public class DesignTacoController {
     private TacoJPARepository tacoRepository;
 
     @GetMapping("/recent")
+    @ApiOperation(value = "获取最近的Tacos")
     public Iterable<Taco> recentTacos() {
         PageRequest page = PageRequest.of(0, 12, Sort.by("createdAt").descending());
 

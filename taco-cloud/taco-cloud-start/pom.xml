@@ -32,11 +32,6 @@
             <artifactId>taco-cloud-api</artifactId>
             <version>${taco-cloud.version}</version>
         </dependency>
-        <dependency>
-            <groupId>tacos</groupId>
-            <artifactId>taco-cloud-ui</artifactId>
-            <version>${taco-cloud.version}</version>
-        </dependency>
     </dependencies>
 
 </project>

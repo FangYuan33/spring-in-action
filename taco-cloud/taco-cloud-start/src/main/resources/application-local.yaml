@@ -6,10 +6,3 @@ logging:
     root: INFO
     org.springframework.security: WARN
     org.springframework.jdbc.core.JdbcTemplate: DEBUG
-  # 如果有写入权限，则会将日志信息写入到如下文件中，默认写10M就会轮换
-#  file:
-#    path: /var/logs/Taco.log
-
-taco:
-  design:
-    testProperties: 1
