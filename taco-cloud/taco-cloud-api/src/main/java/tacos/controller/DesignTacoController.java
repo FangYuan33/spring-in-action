@@ -30,7 +30,7 @@ public class DesignTacoController {
     @GetMapping("/recent")
     @ApiOperation(value = "获取最近的Tacos")
     public Iterable<Taco> recentTacos() {
-        PageRequest page = PageRequest.of(0, 12, Sort.by("createdAt").descending());
+        PageRequest page = PageRequest.of(0, 12, Sort.by("id").descending());
 
         return tacoRepository.findAll(page).getContent();
     }
