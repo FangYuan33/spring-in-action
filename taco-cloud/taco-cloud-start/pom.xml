@@ -24,11 +24,6 @@
         </dependency>
         <dependency>
             <groupId>tacos</groupId>
-            <artifactId>taco-cloud-security</artifactId>
-            <version>${taco-cloud.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>tacos</groupId>
             <artifactId>taco-cloud-api</artifactId>
             <version>${taco-cloud.version}</version>
         </dependency>

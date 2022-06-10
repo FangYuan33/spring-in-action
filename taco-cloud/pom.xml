@@ -5,9 +5,9 @@
     <modules>
         <module>taco-cloud-domain</module>
         <module>taco-cloud-data</module>
-        <module>taco-cloud-security</module>
         <module>taco-cloud-api</module>
         <module>taco-cloud-start</module>
+        <module>taco-cloud-service</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -78,11 +78,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
 

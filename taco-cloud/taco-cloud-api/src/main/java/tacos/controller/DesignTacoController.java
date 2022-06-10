@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tacos.domain.Ingredient;
@@ -14,13 +16,14 @@ import tacos.repository.TacoJPARepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/design")
-@Api(value = "Tacos设计控制器")
+@Api(tags = "Tacos设计控制器")
 public class DesignTacoController {
 
     // jdbc
@@ -33,6 +36,15 @@ public class DesignTacoController {
         PageRequest page = PageRequest.of(0, 12, Sort.by("id").descending());
 
         return tacoRepository.findAll(page).getContent();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "根据ID获取Taco")
+    public ResponseEntity<Taco> tacoById(@PathVariable("id") Long id) {
+        Optional<Taco> taco = tacoRepository.findById(id);
+
+        return taco.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     /**

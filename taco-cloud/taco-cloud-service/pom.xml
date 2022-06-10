@@ -9,7 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>taco-cloud-security</artifactId>
+    <artifactId>taco-cloud-service</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -17,11 +22,16 @@
             <artifactId>taco-cloud-data</artifactId>
             <version>${taco-cloud.version}</version>
         </dependency>
-
         <dependency>
             <groupId>tacos</groupId>
             <artifactId>taco-cloud-domain</artifactId>
             <version>${taco-cloud.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
         </dependency>
     </dependencies>
 </project>

@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>tacos</groupId>
-            <artifactId>taco-cloud-security</artifactId>
+            <artifactId>taco-cloud-service</artifactId>
             <version>${taco-cloud.version}</version>
         </dependency>
 

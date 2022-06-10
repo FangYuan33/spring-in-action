@@ -2,6 +2,10 @@
 
 ### chapter_06
 
+@RestController 注解会告诉Spring控制器中的所有处理器防范的返回值都要直接写入响应体中，而不是将值放到模型中并传递给一个视图以便于渲染。
+
+
+
 ---
 
 dependencyManagement元素提供了一种管理依赖版本号的方式。在dependencyManagement元素中声明所依赖的jar包的版本号等信息，
