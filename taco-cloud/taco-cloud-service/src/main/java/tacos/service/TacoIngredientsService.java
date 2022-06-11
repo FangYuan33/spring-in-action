@@ -1,4 +1,4 @@
-package tacos.registration.service;
+package tacos.service;
 
 import tacos.domain.TacoIngredients;
 

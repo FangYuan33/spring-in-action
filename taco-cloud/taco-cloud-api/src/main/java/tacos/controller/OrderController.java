@@ -1,52 +1,50 @@
 package tacos.controller;
 
-import com.alibaba.fastjson.JSON;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import tacos.domain.Order;
-import tacos.repository.OrderRepository;
+import tacos.dto.TacoOrderDto;
+import tacos.service.OrderService;
 
-import javax.validation.Valid;
+import java.util.List;
 
-/**
- * 如果这个请求过来的时候，Session中没有携带order，那么会报错
- */
 @Slf4j
-
-@SessionAttributes("order")
+@RestController
+@Api(tags = "订单模块")
 @RequestMapping("/orders")
 public class OrderController {
 
+    @Autowired
+    private OrderService orderService;
 
-    private OrderRepository orderRepository;
+    @GetMapping
+    @ApiOperation("获取所有订单")
+    public List<Order> allOrders() {
+        return orderService.listAll();
+    }
 
-    @GetMapping("/current")
-    public String orderForm() {
-        return "orderForm";
+    @PostMapping
+    @ApiOperation("新增订单")
+    public void createOrder(@RequestBody TacoOrderDto tacoOrderDto) {
+        orderService.save(tacoOrderDto);
     }
 
     /**
-     * 添加参数 @AuthenticationPrincipal User user 也可以获取到user信息
-     *
-     * @param order order对象可以从Session中获取到taco信息
+     * PutMapping 语义上是这对整体的更新（大规模）
      */
-    @PostMapping
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus) {
-        if (errors.hasErrors()) {
-            return "orderForm";
-        }
+    @PutMapping("/updateAll/{orderId}")
+    public void updateAllField(@PathVariable Long orderId, @RequestBody TacoOrderDto tacoOrderDto) {
+        orderService.updateById(orderId, tacoOrderDto);
+    }
 
-        log.info("Order Info: " + JSON.toJSONString(order));
-        // 保存订单和对应连表信息
-        orderRepository.save(order);
-
-        // 保存完之后重置Session
-        sessionStatus.setComplete();
-
-        return "redirect:/design";
+    /**
+     * PatchMapping 语义上是对任一字段的更新
+     */
+    @PatchMapping("/updateAny/{orderId}")
+    public void updateAnyField(@PathVariable Long orderId, @RequestBody TacoOrderDto tacoOrderDto) {
+        orderService.updateById(orderId, tacoOrderDto);
     }
 }

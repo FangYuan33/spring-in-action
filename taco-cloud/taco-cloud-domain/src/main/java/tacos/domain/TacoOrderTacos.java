@@ -1,6 +1,7 @@
 package tacos.domain;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
+@Accessors(chain = true)
 @RequiredArgsConstructor
 @Entity(name = "taco_order_tacos")
 public class TacoOrderTacos {

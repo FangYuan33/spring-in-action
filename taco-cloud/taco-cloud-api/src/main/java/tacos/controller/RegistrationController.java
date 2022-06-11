@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
-import tacos.registration.dto.RegistrationDto;
+import tacos.dto.RegistrationDto;
 import tacos.repository.UserJPARepository;
 import tacos.domain.User;
 

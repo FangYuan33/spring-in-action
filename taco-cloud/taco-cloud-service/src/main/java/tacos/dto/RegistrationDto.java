@@ -1,4 +1,4 @@
-package tacos.registration.dto;
+package tacos.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

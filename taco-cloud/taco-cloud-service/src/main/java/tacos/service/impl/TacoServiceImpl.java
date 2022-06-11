@@ -1,12 +1,12 @@
-package tacos.registration.service.impl;
+package tacos.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tacos.registration.dto.TacoDto;
+import tacos.dto.TacoDto;
 import tacos.domain.Taco;
 import tacos.domain.TacoIngredients;
-import tacos.registration.service.TacoIngredientsService;
-import tacos.registration.service.TacoService;
+import tacos.service.TacoIngredientsService;
+import tacos.service.TacoService;
 import tacos.repository.TacoJPARepository;
 
 import java.util.List;

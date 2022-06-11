@@ -1,20 +1,21 @@
 package tacos.domain;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
 @Getter
 @Setter
 @ToString
+@Accessors(chain = true)
 @RequiredArgsConstructor
+@Entity(name = "taco_order")
 @EntityListeners(AuditingEntityListener.class)
 public class Order {
 
@@ -22,7 +23,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message="Name is required")
     private String orderName;
 
     private String address;
@@ -32,6 +32,7 @@ public class Order {
     private String phone;
 
     @CreatedDate
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     @Override

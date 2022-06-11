@@ -9,9 +9,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tacos.registration.dto.TacoDto;
+import tacos.dto.TacoDto;
 import tacos.domain.Taco;
-import tacos.registration.service.TacoService;
+import tacos.service.TacoService;
 import tacos.repository.TacoJPARepository;
 
 import java.util.Optional;
