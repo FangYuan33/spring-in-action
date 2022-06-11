@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 import tacos.dto.RegistrationDto;
-import tacos.repository.UserJPARepository;
 import tacos.domain.User;
+import tacos.service.UserService;
 
 @RestController
 @Api(tags = "注册模块")
@@ -19,13 +19,13 @@ import tacos.domain.User;
 public class RegistrationController {
 
     @Autowired
-    private UserJPARepository userJPARepository;
+    private UserService userService;
 
     @PostMapping
     public ResponseEntity<Object> processRegistration(RegistrationDto registrationInfo) {
         User user = new User();
         BeanUtils.copyProperties(registrationInfo, user);
-        userJPARepository.save(user);
+        userService.save(user);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

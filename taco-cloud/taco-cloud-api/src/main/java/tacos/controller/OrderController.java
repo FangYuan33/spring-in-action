@@ -23,7 +23,7 @@ public class OrderController {
     @GetMapping
     @ApiOperation("获取所有订单")
     public List<Order> allOrders() {
-        return orderService.listAll();
+        return orderService.list();
     }
 
     @PostMapping

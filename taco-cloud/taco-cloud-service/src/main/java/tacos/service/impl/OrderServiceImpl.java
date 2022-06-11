@@ -1,36 +1,30 @@
 package tacos.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tacos.domain.Order;
 import tacos.domain.TacoOrderTacos;
 import tacos.dto.TacoOrderDto;
+import tacos.repository.mapper.OrderMapper;
 import tacos.service.OrderService;
-import tacos.repository.OrderJPARepository;
 import tacos.service.TacoOrderTacosService;
 
 import java.util.List;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
 
-    @Autowired
-    private OrderJPARepository orderJPARepository;
     @Autowired
     private TacoOrderTacosService tacoOrderTacosService;
-
-    @Override
-    public List<Order> listAll() {
-        return (List<Order>) orderJPARepository.findAll();
-    }
 
     @Override
     public void save(TacoOrderDto tacoOrderDto) {
         Order order = new Order().setOrderName(tacoOrderDto.getOrderName())
                 .setAddress(tacoOrderDto.getAddress()).setPhone(tacoOrderDto.getPhone());
-        Order id = orderJPARepository.save(order);
+        baseMapper.insert(order);
 
-        saveOrderDetails(tacoOrderDto.getTacoIds(), id.getId());
+        saveOrderDetails(tacoOrderDto.getTacoIds(), order.getId());
     }
 
     private void saveOrderDetails(List<Long> tacoIds, Long tacoOrderId) {
@@ -43,9 +37,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void updateById(Long orderId, TacoOrderDto tacoOrderDto) {
-        Order order = new Order().setId(orderId).setOrderName(tacoOrderDto.getOrderName())
-                .setAddress(tacoOrderDto.getAddress()).setPhone(tacoOrderDto.getPhone());
+        Order order = (Order) new Order().setOrderName(tacoOrderDto.getOrderName())
+                .setAddress(tacoOrderDto.getAddress()).setPhone(tacoOrderDto.getPhone()).setId(orderId);
 
-        orderJPARepository.save(order);
+        baseMapper.updateById(order);
     }
 }

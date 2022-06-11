@@ -4,5 +4,5 @@ server:
 logging:
   level:
     root: INFO
-    # JPA SQL logger
-    org.hibernate.SQL: DEBUG
+    # mybatis SQL logger
+    tacos.repository.mapper: DEBUG

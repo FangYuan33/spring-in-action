@@ -1,19 +1,13 @@
 package tacos.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import tacos.domain.TacoOrderTacos;
-import tacos.repository.TacoOrderTacosJPARepository;
+import tacos.repository.mapper.TacoOrderTacosMapper;
 import tacos.service.TacoOrderTacosService;
 
 @Service
-public class TacoOrderTacosServiceImpl implements TacoOrderTacosService {
+public class TacoOrderTacosServiceImpl extends ServiceImpl<TacoOrderTacosMapper, TacoOrderTacos>
+        implements TacoOrderTacosService {
 
-    @Autowired
-    private TacoOrderTacosJPARepository tacoOrderTacosJPARepository;
-
-    @Override
-    public void save(TacoOrderTacos tacoOrderTacos) {
-        tacoOrderTacosJPARepository.save(tacoOrderTacos);
-    }
 }

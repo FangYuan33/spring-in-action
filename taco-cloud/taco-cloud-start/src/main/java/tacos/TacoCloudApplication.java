@@ -1,11 +1,11 @@
 package tacos;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@EnableJpaAuditing
 @SpringBootApplication(scanBasePackages = "tacos")
+@MapperScan("tacos.repository.mapper")
 public class TacoCloudApplication {
 
     public static void main(String[] args) {

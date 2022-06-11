@@ -21,6 +21,8 @@ create table if not exists taco_ingredients (
 
 create index taco_ingredient_index on taco_ingredients (taco, ingredient);
 
+alter table taco_ingredients add column created_at timestamp not null comment '创建时间';
+
 create table if not exists taco_order (
     id bigint(20) not null auto_increment,
     order_name varchar(50) not null comment '订单名',
@@ -41,6 +43,8 @@ create table if not exists taco_order_tacos (
 );
 
 create index taco_order_index on taco_order_tacos (taco_order, taco);
+
+alter table taco_order_tacos add column created_at timestamp not null comment '创建时间';
 
 create table if not exists user (
     id bigint(20) not null auto_increment,

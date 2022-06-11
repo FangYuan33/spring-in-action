@@ -1,7 +1,8 @@
 package tacos.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import tacos.domain.TacoOrderTacos;
 
-public interface TacoOrderTacosService {
-    void save(TacoOrderTacos tacoOrderTacos);
+public interface TacoOrderTacosService extends IService<TacoOrderTacos> {
+
 }

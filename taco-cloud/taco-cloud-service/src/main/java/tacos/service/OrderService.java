@@ -1,13 +1,11 @@
 package tacos.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import tacos.domain.Order;
 import tacos.dto.TacoOrderDto;
 
-import java.util.List;
 
-public interface OrderService {
-
-    List<Order> listAll();
+public interface OrderService extends IService<Order> {
 
     void save(TacoOrderDto tacoOrderDto);
 
