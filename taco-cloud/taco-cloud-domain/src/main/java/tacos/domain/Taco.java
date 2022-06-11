@@ -1,32 +1,44 @@
 package tacos.domain;
 
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.hibernate.Hibernate;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity(name = "taco")
+@Accessors(chain = true)
+@EntityListeners(AuditingEntityListener.class)
 public class Taco {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Size(min = 3, message = "请输入大于仨字儿的名儿")
     private String name;
 
-    @Transient
-    private List<String> ingredients;
-
+    @CreatedDate
     private LocalDateTime createdAt;
 
-    @PrePersist
-    void createdAt() {
-        this.createdAt = LocalDateTime.now();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Taco taco = (Taco) o;
+        return id != null && Objects.equals(id, taco.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

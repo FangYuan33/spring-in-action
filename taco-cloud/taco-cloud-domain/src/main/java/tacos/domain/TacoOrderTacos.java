@@ -2,40 +2,34 @@ package tacos.domain;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Objects;
 
-@Entity
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
-public class User {
+@Entity(name = "taco_order_tacos")
+public class TacoOrderTacos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userName;
+    private Long tacoOrder;
 
-    private String password;
-
-    private String phoneNumber;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
+    private Long taco;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        User user = (User) o;
-        return id != null && Objects.equals(id, user.id);
+        TacoOrderTacos that = (TacoOrderTacos) o;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

@@ -1,41 +1,37 @@
 package tacos.domain;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @ToString
+@Accessors(chain = true)
 @RequiredArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
-public class User {
+@Table(name = "taco_ingredients", indexes = {
+        @Index(name = "taco_ingredient_index", columnList = "taco, ingredient")
+})
+public class TacoIngredients {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userName;
+    private Long taco;
 
-    private String password;
-
-    private String phoneNumber;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
+    private String ingredient;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        User user = (User) o;
-        return id != null && Objects.equals(id, user.id);
+        TacoIngredients that = (TacoIngredients) o;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

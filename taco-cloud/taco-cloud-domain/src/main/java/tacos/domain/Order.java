@@ -1,45 +1,49 @@
 package tacos.domain;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
-@Data
+@Entity
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Order {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message="Name is required")
     private String orderName;
 
-    @NotBlank(message="Street is required")
-    private String street;
-
-    private String city;
+    private String address;
 
     private String state;
 
-    private String zip;
+    private String phone;
 
-    private String ccNumber;
+    @CreatedDate
+    private LocalDateTime createdAt;
 
-    private String ccExpiration;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Order order = (Order) o;
+        return id != null && Objects.equals(id, order.id);
+    }
 
-    private String ccCVV;
-
-    private LocalDateTime placedAt;
-
-    private Long userId;
-
-    /**
-     * 订单中保存多个taco
-     */
-    private List<Taco> tacos = new ArrayList<>();
-
-    public void addTaco(Taco taco) {
-        tacos.add(taco);
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

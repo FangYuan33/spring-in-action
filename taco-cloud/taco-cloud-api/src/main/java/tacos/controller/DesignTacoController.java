@@ -8,27 +8,25 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import tacos.domain.Ingredient;
+import tacos.registration.dto.TacoDto;
 import tacos.domain.Taco;
+import tacos.registration.service.TacoService;
 import tacos.repository.TacoJPARepository;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/design")
 @Api(tags = "Tacos设计控制器")
 public class DesignTacoController {
 
-    // jdbc
     @Autowired
     private TacoJPARepository tacoRepository;
+
+    @Autowired
+    private TacoService tacoService;
 
     @GetMapping("/recent")
     @ApiOperation(value = "获取最近的Tacos")
@@ -47,24 +45,10 @@ public class DesignTacoController {
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    /**
-     * 初始化食材并添加供前端页面展示
-     */
-    private void initialAndAddIngredientsToView(Model model) {
-        List<Ingredient> ingredients = new ArrayList<>();
-//        ingredientRepository.findAll().forEach(ingredients::add);
-
-        // 根据食材种类分类之后添加到model中 以分类在前台页面展示
-        Ingredient.Type[] typeValues = Ingredient.Type.values();
-        for (Ingredient.Type typeValue : typeValues) {
-            model.addAttribute(typeValue.toString().toLowerCase(), filterByType(ingredients, typeValue));
-        }
-    }
-
-    /**
-     * 根据类型获取对应种类的食材
-     */
-    private List<Ingredient> filterByType(List<Ingredient> ingredients, Ingredient.Type type) {
-        return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
+    @ApiOperation(value = "设计Taco")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(value = "/design")
+    public void designTaco(@RequestBody TacoDto tacoDto) {
+        tacoService.saveTaco(tacoDto);
     }
 }
