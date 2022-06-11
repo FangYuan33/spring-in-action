@@ -10,4 +10,6 @@ public interface OrderService extends IService<Order> {
     void save(TacoOrderDto tacoOrderDto);
 
     void updateById(Long orderId, TacoOrderDto tacoOrderDto);
+
+    void deleteOrder(Long orderId);
 }

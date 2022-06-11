@@ -3,6 +3,7 @@ package tacos.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tacos.domain.Order;
 import tacos.domain.TacoOrderTacos;
 import tacos.dto.TacoOrderDto;
@@ -41,5 +42,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 .setAddress(tacoOrderDto.getAddress()).setPhone(tacoOrderDto.getPhone()).setId(orderId);
 
         baseMapper.updateById(order);
+    }
+
+    @Override
+    @Transactional
+    public void deleteOrder(Long orderId) {
+        baseMapper.deleteById(orderId);
+        tacoOrderTacosService.deleteByOrderId(orderId);
     }
 }

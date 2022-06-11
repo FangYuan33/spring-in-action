@@ -5,4 +5,5 @@ import tacos.domain.TacoOrderTacos;
 
 public interface TacoOrderTacosService extends IService<TacoOrderTacos> {
 
+    void deleteByOrderId(Long orderId);
 }

@@ -35,6 +35,7 @@ public class OrderController {
     /**
      * PutMapping 语义上是这对整体的更新（大规模）
      */
+    @ApiOperation("全量更新订单")
     @PutMapping("/updateAll/{orderId}")
     public void updateAllField(@PathVariable Long orderId, @RequestBody TacoOrderDto tacoOrderDto) {
         orderService.updateById(orderId, tacoOrderDto);
@@ -43,8 +44,15 @@ public class OrderController {
     /**
      * PatchMapping 语义上是对任一字段的更新
      */
+    @ApiOperation("非全量更新订单")
     @PatchMapping("/updateAny/{orderId}")
     public void updateAnyField(@PathVariable Long orderId, @RequestBody TacoOrderDto tacoOrderDto) {
         orderService.updateById(orderId, tacoOrderDto);
+    }
+
+    @ApiOperation("删除订单")
+    @DeleteMapping("/{orderId}")
+    public void deleteOrder(@PathVariable Long orderId) {
+        orderService.deleteOrder(orderId);
     }
 }
