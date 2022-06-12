@@ -7,11 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import tacos.domain.Order;
 import tacos.domain.TacoOrderTacos;
 import tacos.dto.TacoOrderDto;
-import tacos.mq.artemis.producer.OrderMessageProducer;
+import tacos.mq.OrderMessageProducer;
 import tacos.repository.mapper.OrderMapper;
 import tacos.service.OrderService;
 import tacos.service.TacoOrderTacosService;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
@@ -19,8 +20,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Autowired
     private TacoOrderTacosService tacoOrderTacosService;
-    @Autowired
-    private OrderMessageProducer orderMessageProducer;
+    @Resource(name = "kafkaOrderMessageProducer")
+    private OrderMessageProducer kafkaOrderMessageProducer;
 
     @Override
     @Transactional
@@ -32,7 +33,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         saveOrderDetails(tacoOrderDto.getTacoIds(), order.getId());
 
         // 发送异步订单消息给后厨
-        orderMessageProducer.sendOrder(order);
+        kafkaOrderMessageProducer.sendOrder(order);
     }
 
     private void saveOrderDetails(List<Long> tacoIds, Long tacoOrderId) {

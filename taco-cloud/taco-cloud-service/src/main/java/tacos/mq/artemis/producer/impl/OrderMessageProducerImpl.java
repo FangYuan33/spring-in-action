@@ -6,16 +6,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import tacos.domain.Order;
-import tacos.mq.artemis.producer.OrderMessageProducer;
+import tacos.mq.OrderMessageProducer;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
 
 @Slf4j
 @Service
+@ConditionalOnProperty(value = "mq.enable", havingValue = "artemis")
 public class OrderMessageProducerImpl implements OrderMessageProducer {
 
     @Setter
@@ -26,10 +28,12 @@ public class OrderMessageProducerImpl implements OrderMessageProducer {
     private JmsTemplate jmsTemplate;
 
     @Override
-    public void sendOrder(Order order) {
+    public boolean sendOrder(Order order) {
         log.info("发送给后厨的订单: {}", JSON.toJSONString(order));
 
         jmsTemplate.convertAndSend(orderQueue, order, this::addOrderSource);
+
+        return true;
     }
 
     /**

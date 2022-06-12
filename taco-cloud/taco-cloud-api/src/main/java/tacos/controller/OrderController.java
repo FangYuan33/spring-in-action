@@ -22,7 +22,8 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
-    @Autowired
+    // 未启用artemis时则不注入这个bean
+    @Autowired(required = false)
     private OrderMessageConsumer orderMessageConsumer;
 
     @GetMapping

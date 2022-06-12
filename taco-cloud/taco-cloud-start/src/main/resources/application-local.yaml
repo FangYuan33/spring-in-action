@@ -16,6 +16,18 @@ spring:
   jms:
     template:
       default-destination: taco-cloud-order-queue
+  kafka:
+    # 注意这里的地址
+    bootstrap-servers: xxx:9092
+    consumer:
+      group-id: "taco-cloud"
+
+# 用于控制注入使用的消息Bean
+mq:
+  enable: kafka
 
 artemis:
   orderQueue: taco-cloud-order-queue
+
+kafka:
+  orderTopic: taco-cloud-order-topic

@@ -1,8 +1,8 @@
-package tacos.mq.artemis.producer;
+package tacos.mq;
 
 import tacos.domain.Order;
 
 public interface OrderMessageProducer {
 
-    void sendOrder(Order order);
+    boolean sendOrder(Order order);
 }
