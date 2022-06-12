@@ -12,7 +12,7 @@
 
 HATEOAS（超媒体应用状态引擎）被称为HAL超文本语言，是一种在JSON响应中嵌入超链接的简单通用格式，创建自描述API。
 
-![img.png](img.png)
+![img.png](images/chapter6/img.png)
 
 可以去看看代码里的例子
 
