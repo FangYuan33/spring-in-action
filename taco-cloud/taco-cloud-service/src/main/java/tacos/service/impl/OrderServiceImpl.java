@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tacos.domain.Order;
 import tacos.domain.TacoOrderTacos;
 import tacos.dto.TacoOrderDto;
+import tacos.mq.artemis.producer.OrderMessageProducer;
 import tacos.repository.mapper.OrderMapper;
 import tacos.service.OrderService;
 import tacos.service.TacoOrderTacosService;
@@ -18,14 +19,20 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Autowired
     private TacoOrderTacosService tacoOrderTacosService;
+    @Autowired
+    private OrderMessageProducer orderMessageProducer;
 
     @Override
+    @Transactional
     public void save(TacoOrderDto tacoOrderDto) {
         Order order = new Order().setOrderName(tacoOrderDto.getOrderName())
                 .setAddress(tacoOrderDto.getAddress()).setPhone(tacoOrderDto.getPhone());
         baseMapper.insert(order);
 
         saveOrderDetails(tacoOrderDto.getTacoIds(), order.getId());
+
+        // 发送异步订单消息给后厨
+        orderMessageProducer.sendOrder(order);
     }
 
     private void saveOrderDetails(List<Long> tacoIds, Long tacoOrderId) {

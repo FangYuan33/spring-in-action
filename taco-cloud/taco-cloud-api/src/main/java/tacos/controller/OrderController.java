@@ -4,9 +4,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tacos.domain.Order;
 import tacos.dto.TacoOrderDto;
+import tacos.mq.artemis.consumer.OrderMessageConsumer;
 import tacos.service.OrderService;
 
 import java.util.List;
@@ -19,6 +22,8 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private OrderMessageConsumer orderMessageConsumer;
 
     @GetMapping
     @ApiOperation("获取所有订单")
@@ -54,5 +59,11 @@ public class OrderController {
     @DeleteMapping("/{orderId}")
     public void deleteOrder(@PathVariable Long orderId) {
         orderService.deleteOrder(orderId);
+    }
+
+    @GetMapping("/cookNextOrder")
+    @ApiOperation("厨师获取下一个需要做的订单")
+    public ResponseEntity<Order> cookNextOrder() {
+        return new ResponseEntity<>(orderMessageConsumer.receiveOrder(), HttpStatus.OK);
     }
 }

@@ -13,3 +13,9 @@ spring:
     broker-url: tcp://xxx:8161
     user: admin
     password: admin
+  jms:
+    template:
+      default-destination: taco-cloud-order-queue
+
+artemis:
+  orderQueue: taco-cloud-order-queue
