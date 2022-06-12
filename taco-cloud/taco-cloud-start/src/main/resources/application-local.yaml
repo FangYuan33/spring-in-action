@@ -6,3 +6,10 @@ logging:
     root: INFO
     # mybatis SQL logger
     tacos.repository.mapper: DEBUG
+
+spring:
+  artemis:
+    # 注意这里的地址
+    broker-url: tcp://xxx:8161
+    user: admin
+    password: admin
