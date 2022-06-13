@@ -1,5 +1,11 @@
 ## Spring实战（第五版）学习笔记
 
+### chapter_09
+
+第一个Spring Integration流程图
+
+![](chapter09-1.png)
+
 ### chapter_06
 
 @RestController 注解会告诉Spring控制器中的所有处理器防范的返回值都要直接写入响应体中，而不是将值放到模型中并传递给一个视图以便于渲染。
