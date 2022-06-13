@@ -2,6 +2,11 @@
 
 ### chapter_09
 
+Spring Integration在基于Spring的应用程序中实现轻量级消息传递，并支持通过声明适配器与外部系统集成。
+
+它就像是一个控制系统，包括过滤、分流、转换和切分等环节功能，而这每一个环节都类似一个服务，可以是Kafka，Redis，MongoDB，或者是Tcp/UDP，
+可以是我们系统的任何一个模块，Spring Integration就是通过它的组件将这些模块连接到一起形成一个完整的服务，实现企业系统的集成的解决方案。
+
 第一个Spring Integration流程图
 
 ![](chapter09-1.png)

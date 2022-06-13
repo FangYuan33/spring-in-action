@@ -5,6 +5,7 @@ import org.springframework.integration.file.FileHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 
 /**
+ * 通过接口将数据传递到集成流中
  * MessagingGateway告诉Spring在运行时生成该接口的实现
  * <p>
  * defaultRequestChannel: 接口方法调用时所返回的消息要发送给指定的通道
