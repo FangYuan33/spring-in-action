@@ -8,6 +8,7 @@
         <module>taco-cloud-api</module>
         <module>taco-cloud-start</module>
         <module>taco-cloud-service</module>
+        <module>taco-cloud-email</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
