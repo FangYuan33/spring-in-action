@@ -4,12 +4,27 @@
 
 Spring Integration在基于Spring的应用程序中实现轻量级消息传递，并支持通过声明适配器与外部系统集成。
 
-它就像是一个控制系统，包括过滤、分流、转换和切分等环节功能，而这每一个环节都类似一个服务，可以是Kafka，Redis，MongoDB，或者是Tcp/UDP，
+它就像是一个控制系统，包括过滤、分流、转换和切分等环节功能，而这每一个环节都类似一个服务，可以是MQ，Redis，MongoDB，或者是TCP/UDP，
 可以是我们系统的任何一个模块，Spring Integration就是通过它的组件将这些模块连接到一起形成一个完整的服务，实现企业系统的集成的解决方案。
+
+---
 
 第一个Spring Integration流程图
 
 ![](chapter09-1.png)
+
+---
+
+Spring Integration 的组件
+
+- 通道：将消息从一个元素传递到另一个元素。默认DirectChannel: 消息只会发送至一个消费者，他会在与发送者相同的线程中调用消费者。
+- 过滤器@Filter：它能够通过判断来允许或拒绝消息进入下一个流程。
+- 转换器@Transformer: 它会对消息执行一些操作，可能会形成不同的消息。
+- 路由器@Router: 基于判断，能够将消息进行分流。
+- 切分器@Splitter: 能够切分和处理消息。
+- 服务激活器@ServiceActivator: 接受来自通道的消息，并发送至一个MessageHandler进行处理，一般将其作为流程的终点。
+- 网关@MessagingGateway: 它被声明为接口，通过网关应用可以提交数据到集成流中，并且`可选的`接受流的结果作为响应。相当于是接口里的一个方法，定义入参，返回值可以有也可以没有。
+- 入站通道适配器@InboundChannelAdapter: 
 
 ### chapter_06
 
