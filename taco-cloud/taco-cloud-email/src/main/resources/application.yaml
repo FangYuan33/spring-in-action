@@ -1,8 +1,9 @@
 tacocloud:
-  email: imap.qq.com
-  mailbox: 374072213@qq.com
-  username: 374072213
-  password: xxxxxx
+  email:
+    host: imap.qq.com
+    mailbox: inbox
+    username: xxx
+    password: xxx
 
 spring:
   main:
