@@ -3,7 +3,6 @@ package tacos.mq.artemis.producer.impl;
 import com.alibaba.fastjson.JSON;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -39,7 +38,6 @@ public class OrderMessageProducerImpl implements OrderMessageProducer {
     /**
      * 消息的后置处理器
      */
-    @NotNull
     private Message addOrderSource(Message message) throws JMSException {
         message.setStringProperty("ORDER_SOURCE", "WEB");
 
