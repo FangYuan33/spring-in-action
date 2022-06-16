@@ -15,7 +15,7 @@ public class TacoSubmitMessageHandler implements GenericHandler<TacoDto> {
 
     @Override
     public Object handle(TacoDto tacoDto, MessageHeaders headers) {
-        restTemplate.postForObject("localhost:8080/design/design", tacoDto, Void.class);
+        restTemplate.postForObject("http://localhost:8080/design/design", tacoDto, Void.class);
         return null;
     }
 }
