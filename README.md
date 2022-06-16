@@ -11,7 +11,7 @@ Spring Integration在基于Spring的应用程序中实现轻量级消息传递�
 
 第一个Spring Integration流程图
 
-![](chapter09-1.png)
+![](images/chapter9/chapter09-1.png)
 
 ---
 
