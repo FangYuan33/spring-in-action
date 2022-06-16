@@ -1,5 +1,6 @@
 package tacos.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,6 +56,7 @@ public class DesignTacoController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/design")
     public void designTaco(@RequestBody TacoDto tacoDto) {
+        log.info("设计新的Taco: {}", JSON.toJSONString(tacoDto));
         tacoService.saveTaco(tacoDto);
     }
 }

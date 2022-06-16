@@ -1,5 +1,6 @@
 package tacos.email.config;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.integration.mail.transformer.AbstractMailMessageTransformer;
 import org.springframework.integration.support.AbstractIntegrationMessageBuilder;
@@ -63,6 +64,8 @@ public class EmailToTacoTransformer extends AbstractMailMessageTransformer<TacoD
                 tacoDto.getIngredients().addAll(Arrays.asList(ingredientsId));
             }
         }
+
+        log.info("邮件Taco已生成: {}", JSON.toJSONString(tacoDto));
 
         return tacoDto;
     }
