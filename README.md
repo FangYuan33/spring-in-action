@@ -26,6 +26,12 @@ Spring Integration 的组件
 - 网关@MessagingGateway: 它被声明为接口，通过网关应用可以提交数据到集成流中，并且`可选的`接受流的结果作为响应。相当于是接口里的一个方法，定义入参，返回值可以有也可以没有。
 - 入站通道适配器@InboundChannelAdapter: 
 
+---
+
+maven optional标签为true时，能够避免产生重复依赖，比如A项目中有Lombok，没有添加optional标签时，B依赖A，那么B中也会有Lombok依赖
+
+若optional为true时，此时B再依赖A，那么B中就没有Lombok可用了。optional是maven依赖jar时的一个选项，表示该依赖是可选的，不会被依赖传递。
+
 ### chapter_06
 
 @RestController 注解会告诉Spring控制器中的所有处理器防范的返回值都要直接写入响应体中，而不是将值放到模型中并传递给一个视图以便于渲染。
