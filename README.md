@@ -8,11 +8,13 @@
 即使有时我们写的反应式编程仍然保持着按步骤执行的模型，但是实际上数据在处理过程中，可能在一个线程中也可能不在一个线程中，这是我们无法判断的。
 
 ---
-create\buffer\log\merge\transforming 练习以代码为准
+create\buffer\log\merge\transforming的流操作以代码为准
 
 ---
 
+Reactor原理！
 
+![](images/chapter_10_reactor原理.png)
 ### chapter_09
 
 Spring Integration在基于Spring的应用程序中实现轻量级消息传递，并支持通过声明适配器与外部系统集成。
