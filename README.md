@@ -20,6 +20,9 @@
 WebFlux默认的服务器是Netty，它是一个异步、事件驱动的服务器。
 
 ---
+函数式请求处理器的配置以 taco.functionConfig包下的代码为准，其中RouterFunction声明如何将请求路由到请求处理代码中
+
+---
 
 定义反应式的WebFlux控制器和定义Spring MVC控制器没有什么差别，它们使用的注解是一样的。
 而返回值定义成Flux返回，框架它会帮我们调用subscribe()方法。
