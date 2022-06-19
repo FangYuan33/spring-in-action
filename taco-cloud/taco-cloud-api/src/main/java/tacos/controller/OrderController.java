@@ -4,16 +4,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import tacos.domain.Order;
 import tacos.dto.TacoOrderDto;
 import tacos.mq.artemis.consumer.OrderMessageConsumer;
 import tacos.service.OrderService;
 
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -47,8 +45,9 @@ public class OrderController {
 
     @PostMapping
     @ApiOperation("新增订单")
-    public void createOrder(@RequestBody TacoOrderDto tacoOrderDto) {
+    public Mono<Void> createOrder(@RequestBody TacoOrderDto tacoOrderDto) {
         orderService.save(tacoOrderDto);
+        return Mono.empty();
     }
 
     /**
@@ -56,8 +55,9 @@ public class OrderController {
      */
     @ApiOperation("全量更新订单")
     @PutMapping("/updateAll/{orderId}")
-    public void updateAllField(@PathVariable Long orderId, @RequestBody TacoOrderDto tacoOrderDto) {
+    public Mono<Void> updateAllField(@PathVariable Long orderId, @RequestBody TacoOrderDto tacoOrderDto) {
         orderService.updateById(orderId, tacoOrderDto);
+        return Mono.empty();
     }
 
     /**
@@ -65,19 +65,27 @@ public class OrderController {
      */
     @ApiOperation("非全量更新订单")
     @PatchMapping("/updateAny/{orderId}")
-    public void updateAnyField(@PathVariable Long orderId, @RequestBody TacoOrderDto tacoOrderDto) {
+    public Mono<Void> updateAnyField(@PathVariable Long orderId, @RequestBody TacoOrderDto tacoOrderDto) {
         orderService.updateById(orderId, tacoOrderDto);
+        return Mono.empty();
     }
 
     @ApiOperation("删除订单")
     @DeleteMapping("/{orderId}")
-    public void deleteOrder(@PathVariable Long orderId) {
+    public Mono<Void> deleteOrder(@PathVariable Long orderId) {
         orderService.deleteOrder(orderId);
+        return Mono.empty();
     }
 
     @GetMapping("/cookNextOrder")
     @ApiOperation("厨师获取下一个需要做的订单")
-    public ResponseEntity<Order> cookNextOrder() {
-        return new ResponseEntity<>(orderMessageConsumer.receiveOrder(), HttpStatus.OK);
+    public Mono<Order> cookNextOrder() {
+        Order order = orderMessageConsumer.receiveOrder();
+
+        if (order != null) {
+            return Mono.just(order);
+        } else {
+            return Mono.empty();
+        }
     }
 }
