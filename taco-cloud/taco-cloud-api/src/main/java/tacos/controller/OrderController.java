@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import tacos.domain.Order;
 import tacos.dto.TacoOrderDto;
 import tacos.mq.artemis.consumer.OrderMessageConsumer;
@@ -28,8 +29,20 @@ public class OrderController {
 
     @GetMapping
     @ApiOperation("获取所有订单")
-    public List<Order> allOrders() {
-        return orderService.list();
+    public Flux<Order> allOrders() {
+        return Flux.fromIterable(orderService.list());
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("获取某一条订单")
+    public Flux<Order> oneOrder(@PathVariable Long id) {
+        Order order = orderService.getById(id);
+
+        if (order != null) {
+            return Flux.just(order);
+        } else {
+            return Flux.empty();
+        }
     }
 
     @PostMapping
