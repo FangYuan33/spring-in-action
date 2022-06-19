@@ -14,9 +14,9 @@ import tacos.service.OrderService;
 
 
 @Slf4j
-@RestController
+//@RestController
 @Api(tags = "订单模块")
-@RequestMapping("/orders")
+//@RequestMapping("/orders")
 public class OrderController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class OrderController {
     @Autowired(required = false)
     private OrderMessageConsumer orderMessageConsumer;
 
-    @GetMapping
+//    @GetMapping
     @ApiOperation("获取所有订单")
     public Flux<Order> allOrders() {
         return Flux.fromIterable(orderService.list());
