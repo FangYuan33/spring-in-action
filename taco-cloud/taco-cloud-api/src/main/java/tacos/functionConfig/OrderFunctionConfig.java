@@ -1,4 +1,4 @@
-package tacos.config;
+package tacos.functionConfig;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
