@@ -1,5 +1,12 @@
 ## Spring实战（第五版）学习笔记
 
+### chapter_12
+
+只有当与这些控制器协作的其他组件都是非阻塞的时候，它们本身才能是非阻塞的。如果我们编写的Spring Flux控制器依赖于阻塞的repository，
+那么反应式控制器需要阻塞等待它们生成数据。
+
+MongoDB是一个基于分布式文档存储的数据库，以BSON（Binary JSON，二进制JSON）格式存储文档。
+
 ### chapter_11
 
 传统的基于Servlet的web框架，如springMVC，其本质上是阻塞和多线程的，每个连接使用一个线程，在处理请求时，
