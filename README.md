@@ -24,6 +24,8 @@ Eureka不喜欢孤独，当我们不经配置启动时，它会每隔30秒就抛
 我们使用的例子是将email服务和taco-cloud服务注册，在email服务发送请求时，便不需要硬编码请求地址了。同时注意@LoadBalance的注解的作用，它能
 够让RestTemplate通过Ribbon查找服务，另外的作用是声明要注入的RestTemplate支持负载均衡。
 
+Feign调用模式还挺酷的，启用Feign之后，指定好服务名，之后像写controller层调用一样...
+
 ### chapter_12
 
 只有当与这些控制器协作的其他组件都是非阻塞的时候，它们本身才能是非阻塞的。如果我们编写的Spring Flux控制器依赖于阻塞的repository，
