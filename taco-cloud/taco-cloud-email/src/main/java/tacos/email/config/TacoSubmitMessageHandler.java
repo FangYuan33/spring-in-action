@@ -20,7 +20,9 @@ public class TacoSubmitMessageHandler implements GenericHandler<TacoDto> {
     public Object handle(TacoDto tacoDto, MessageHeaders headers) {
         if (tacoDto.getName() != null) {
             log.info("您有新的Taco预定: {}", JSON.toJSONString(tacoDto));
-            restTemplate.postForObject("http://localhost:8080/design/design", tacoDto, Void.class);
+
+            // 在这里直接指定上taco-cloud的serviceName代替了之前的 主机名 + 端口号的形式
+            restTemplate.postForObject("http://taco-cloud/taco/design", tacoDto, Void.class);
         }
 
         return null;
