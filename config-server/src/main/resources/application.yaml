@@ -4,10 +4,12 @@ spring:
       server:
         git:
           uri: https://gitee.com/fangyuan33/spring-cloud-config
+          # 添加配置文件扫描目录
+          search-paths: config
   application:
     name: config-server
 server:
-  port: 0
+  port: 8888
 
 eureka:
   client:
