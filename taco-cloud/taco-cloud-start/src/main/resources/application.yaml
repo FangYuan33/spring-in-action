@@ -1,9 +1,6 @@
 spring:
-  profiles:
-    active: local,datasource
-  # 配置这个解决swagger启动报空指针的异常
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
   application:
     name: taco-cloud
+  cloud:
+    config:
+      profile: datasource,local

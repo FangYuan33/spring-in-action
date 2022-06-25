@@ -6,6 +6,28 @@ Spring Cloud Config Server 为多个微服务提供中心化的配置服务。�
 
 当Config Server停机时，这些配置依然是可用的，因为它们会被缓存起来。
 
+---
+
+当配置spring.application.name = taco-cloud时，我们把配置文件命名为taco-cloud.yaml，便会读到这个配置
+
+当有如下配置profile时
+
+![img_1.png](images/chapter14/img_1.png)
+
+会读取`application.yaml taco-cloud-datasource.yaml taco-cloud-local.yaml` 这三个配置
+
+![img_2.png](images/chapter14/img_2.png)
+
+其中application.yaml是**通用配置**，各个服务间是共享的
+
+![img_3.png](images/chapter14/img_3.png)
+
+我们再添加一个application-local.yaml，因为我们配置了local的profile，可以试试它会不会读取这两个有local后缀的配置
+
+![img_4.png](images/chapter14/img_4.png)
+
+也是会的
+
 ### chapter_13
 微服务架构是将应用程序分解为可独立开发和部署的小规模、微型应用的一种方式。这些微服务之间相互写作，以实现更大的应用程序的功能。
 但是它也不是免费的午餐，有自己需要面临和应对的挑战，包括网络延迟，因为有很多的远程调用会累积并降低应用的速度，
@@ -13,7 +35,7 @@ Spring Cloud Config Server 为多个微服务提供中心化的配置服务。�
 
 在微服务应用中，Eureka会担当所有服务的注册中心。Eureka本身也可以作为一个微服务，只不过它在整体中的作用是让其他的服务能够相互发现。
 
-![img.png](img.png)
+![img.png](images/chapter13/img.png)
 
 当服务启动的时候，会按照名称将自己注册到Eureka中，服务名称为`some-service`，可能存在多个等价的实例。当另一个服务`other-service`需要调用
 `some-service`的服务时，会根据名字去Eureka中查找，获取到所有`some-service`的实例，之后通过**客户端负载均衡器Ribbon**来分发请求。
