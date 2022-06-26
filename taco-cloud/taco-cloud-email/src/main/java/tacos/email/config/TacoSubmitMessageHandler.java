@@ -1,6 +1,8 @@
 package tacos.email.config;
 
 import com.alibaba.fastjson.JSON;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,14 @@ public class TacoSubmitMessageHandler implements GenericHandler<TacoDto> {
     @Autowired
     private RestTemplate restTemplate;
 
+    /**
+     * 指定断路器的方法为defaultMessageHandler，超时时间为 5000ms
+     * execution.timeout.enabled 指定false时可以让这个调用无限时间等待
+     */
     @Override
+    @HystrixCommand(fallbackMethod = "defaultMessageHandler",
+            commandProperties =
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000"))
     public Object handle(TacoDto tacoDto, MessageHeaders headers) {
         if (tacoDto.getName() != null) {
             log.info("您有新的Taco预定: {}", JSON.toJSONString(tacoDto));
@@ -39,6 +48,18 @@ public class TacoSubmitMessageHandler implements GenericHandler<TacoDto> {
                 restTemplate.postForObject("http://taco-cloud/taco/design", tacoDto, Void.class);
             }
         }
+
+        return null;
+    }
+
+    /**
+     * 断路器的默认处理方法，需要有一样的方法签名，
+     *
+     * @param e 另外在参数上可以指定抛出的异常在断路器中进行处理
+     */
+    private Object defaultMessageHandler(TacoDto tacoDto, MessageHeaders headers, Throwable e) {
+        log.error("预定发生的异常", e);
+        log.error("{}预定失败", JSON.toJSONString(tacoDto));
 
         return null;
     }
