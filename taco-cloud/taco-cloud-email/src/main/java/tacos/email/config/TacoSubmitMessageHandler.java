@@ -31,11 +31,21 @@ public class TacoSubmitMessageHandler implements GenericHandler<TacoDto> {
     /**
      * 指定断路器的方法为defaultMessageHandler，超时时间为 5000ms
      * execution.timeout.enabled 指定false时可以让这个调用无限时间等待
+     *
+     * 在30s内(metrics.rollingStats.timeInMilliseconds)调用次数超过2(circuitBreaker.requestVolumeThreshold)次，
+     * 且失败率超过50%(circuitBreaker.errorThresholdPercentage)，那么断路器就会进入打开状态
+     *
+     * 断路器进入打开状态60s(circuitBreaker.sleepWindowInMilliseconds)后，则进入半打开状态，将会再次尝试调用原始的方法
      */
     @Override
     @HystrixCommand(fallbackMethod = "defaultMessageHandler",
-            commandProperties =
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000"))
+            commandProperties = {
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000"),
+                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2"),
+                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50"),
+                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "60000"),
+                    @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "30000")
+            })
     public Object handle(TacoDto tacoDto, MessageHeaders headers) {
         if (tacoDto.getName() != null) {
             log.info("您有新的Taco预定: {}", JSON.toJSONString(tacoDto));
