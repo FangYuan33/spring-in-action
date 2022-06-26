@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: taco-cloud
+  cloud:
+    config:
+      profile: datasource,local
+
+# 开放actuator请求路径
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
