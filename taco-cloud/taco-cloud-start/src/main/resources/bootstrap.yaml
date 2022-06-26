@@ -7,6 +7,9 @@ spring:
 
 # 开放actuator请求路径
 management:
+  health:
+    jms:
+      enabled: off
   endpoints:
     web:
       exposure:

@@ -6,3 +6,12 @@ spring:
       uri: http://localhost:8888
 server:
   port: 8089
+
+management:
+  health:
+    jms:
+      enabled: off
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
