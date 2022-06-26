@@ -28,6 +28,20 @@ Spring Cloud Config Server 为多个微服务提供中心化的配置服务。�
 
 也是会的
 
+---
+
+- 配置的手动更新，除了要在Config Server Client微服务中添加actuator依赖之外，
+还需要配置开放出actuator的访问路径，之后便可以访问/actuator/refresh更新配置了
+
+- 配置的自动更新，原理图如下
+![img.png](images/chapter14/img.png)
+
+在Git仓库中配置webhook，当有push推送配置变更时，便会通知Config Server
+
+Config Server之后会对通知做出响应，借助图中的消息代理来广播变更
+
+每个Config Server Client应用订阅该通知，根据通知消息做出响应来刷新配置
+
 ### chapter_13
 微服务架构是将应用程序分解为可独立开发和部署的小规模、微型应用的一种方式。这些微服务之间相互写作，以实现更大的应用程序的功能。
 但是它也不是免费的午餐，有自己需要面临和应对的挑战，包括网络延迟，因为有很多的远程调用会累积并降低应用的速度，

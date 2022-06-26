@@ -1,4 +1,10 @@
 spring:
+  # 添加对kafka配置，以支持配置自动刷新
+  kafka:
+    # 注意这里的地址
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: "taco-cloud"
   cloud:
     config:
       server:
