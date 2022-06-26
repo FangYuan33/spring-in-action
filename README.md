@@ -27,6 +27,20 @@
 断路器进入打开状态`(circuitBreaker.sleepWindowInMilliseconds)`s后，则进入半打开状态，将会再次尝试调用原始的方法，
 成功则进入关闭状态，否则进入打开状态
 
+---
+Hystrix Dashboard 面板内容
+
+![](images/chapter15/img.png)
+
+![](images/chapter15/img_1.png)
+
+---
+Hystrix Dashboard 和Actuator结合只能监控一个流，为了看多个流，我们可以使用turbine项目，它能将多个微服务的流聚合为一个在dashboard中展示
+
+localhost:port/turbine.stream放在dashboard中即可，如下
+
+![img_2.png](images/chapter15/img_2.png)
+
 ### chapter_14
 Spring Cloud Config Server 为多个微服务提供中心化的配置服务。这样配置不再需要和应用程序一起打包和部署了，配置的变更或回滚不再需要重新构建
 和部署应用，甚至可以在应用运行时对配置进行变更。除此之外还能共享相同的配置，而且敏感配置还能进行加密处理。

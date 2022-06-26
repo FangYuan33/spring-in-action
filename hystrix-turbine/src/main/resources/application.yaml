@@ -1,0 +1,18 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: hystrix-turbine
+
+eureka:
+  client:
+    service-url:
+      # 指定Eureka服务器的地址
+      defaultZone: http://localhost:8761/eureka/
+
+turbine:
+  # 要整合的微服务名
+  app-config: email-server, taco-cloud
+  # 要整合的集群名
+  cluster-name-expression: "'default'"
