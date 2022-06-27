@@ -14,3 +14,7 @@ management:
     web:
       exposure:
         include: "*"
+        # 指定不能访问的路径
+#        exclude:
+      # 指定actuator访问的基础路径，默认是/actuator
+      base-path: /actuator
