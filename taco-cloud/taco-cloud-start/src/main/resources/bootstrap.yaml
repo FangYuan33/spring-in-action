@@ -7,6 +7,10 @@ spring:
 
 # 开放actuator请求路径
 management:
+  endpoint:
+    health:
+      # 默认为never 配置成always可以查看应用健康详情
+      show-details: always
   health:
     jms:
       enabled: off

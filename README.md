@@ -9,7 +9,9 @@
 都有哪些可用的配置？源码包的日志级别？应用消耗的内存？给出的HTTP接口被调用了几次？应用本身的健康状态？
 `http://localhost:8080/`actuator`访问这个可以查看暴露出来的可以访问的Actuator接口
 
-
+- `/health`
+获取应用的健康状态，可以通过配置来展现应用健康状态的细节。
+![](ActuatorHealth.jpg)
 
 ### chapter_15
 
