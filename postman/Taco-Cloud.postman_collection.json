@@ -312,6 +312,36 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "修改日志隔离级别",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"configuredLevel\": \"INFO\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/actuator/loggers/tacos.repository.mapper.OrderMapper",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"loggers",
+						"tacos.repository.mapper.OrderMapper"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

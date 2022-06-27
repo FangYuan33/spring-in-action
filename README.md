@@ -13,6 +13,22 @@
 获取应用的健康状态，可以通过配置来展现应用健康状态的细节。
 ![](ActuatorHealth.jpg)
 
+- `/beans`查看应用中的所有bean
+- `/conditions`可以查看自动装配都干了啥...
+- `/env`查看很多环境属性
+- `/mappings`一站式的查看所有公开出来的HTTP请求，不管是自己定义的还是Actuator还是其他的，都能看到
+- `loggers`这个可以查看所有应用的日志隔离级别，configuredLevel表示配置的隔离级别，effectiveLevel是生效的
+`http://localhost:8080/actuator/loggers/tacos.repository.mapper.OrderMapper` 添加上包名后，可以查看对应包的日志等级
+![img.png](img.png)
+
+还可以通过发POST请求来更改日志级别
+
+![img_1.png](img_1.png)
+
+结果如下
+
+![img_2.png](img_2.png)
+
 ### chapter_15
 
 在易于出现失败的方法处声明断路器，它就像是一个更加强大的try/catch，方法调用失败后，可以绕过预期方法而调用后备方法。
