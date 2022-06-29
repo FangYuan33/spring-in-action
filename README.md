@@ -11,7 +11,7 @@
 
 - `/health`
 获取应用的健康状态，可以通过配置来展现应用健康状态的细节。
-![](ActuatorHealth.jpg)
+![](images/chapter16/ActuatorHealth.jpg)
 
 - `/beans`查看应用中的所有bean
 - `/conditions`可以查看自动装配都干了啥...
@@ -19,29 +19,29 @@
 - `/mappings`一站式的查看所有公开出来的HTTP请求，不管是自己定义的还是Actuator还是其他的，都能看到
 - `loggers`这个可以查看所有应用的日志隔离级别，configuredLevel表示配置的隔离级别，effectiveLevel是生效的
 `http://localhost:8080/actuator/loggers/tacos.repository.mapper.OrderMapper` 添加上包名后，可以查看对应包的日志等级
-![img.png](img.png)
+![img.png](images/chapter16/img.png)
 
 还可以通过发POST请求来更改日志级别
 
-![img_1.png](img_1.png)
+![img_1.png](images/chapter16/img_1.png)
 
 结果如下
 
-![img_2.png](img_2.png)
+![img_2.png](images/chapter16/img_2.png)
 
 - `/heapdump`下载应用的dump文件，以此来追踪内存和线程的问题
 - `/threaddump`生成一个当前线程的快照
 - `/metrics`能够查看应用程序中所生成的各种度量指标，包括内存、处理器、垃圾回收、HTTP请求等
 
-![img_3.png](img_3.png)
+![img_3.png](images/chapter16/img_3.png)
 
 来细细的看一下HTTP请求的指标信息，其中measurements包含了请求数量，这些请求的总耗时，以及最大的耗时。
 
-![img_4.png](img_4.png)
+![img_4.png](images/chapter16/img_4.png)
 
 这个availableTags是更细化的内容，包括所有请求的方式，异常，uri和状态等
 
-![img_6.png](img_6.png)
+![img_6.png](images/chapter16/img_6.png)
 
 我们还可以指定后边儿的参数来查看POST请求的信息，还是挺好用的
 
@@ -52,6 +52,9 @@
 - 可以实现InfoContributor接口，往里边儿想加啥加啥
 - 它还能展示Git和Build信息
 
+自定义Health Actuator
+
+自定义Actuator接口
 
 ### chapter_15
 
@@ -65,7 +68,7 @@
 
 断路器的三种状态如下
 
-![](hystrix.jpg)
+![](images/chapter15/hystrix.jpg)
 
 断路器的初始状态为关闭，当原方法调用失败达到一定阈值后，则会进入打开状态，在打开状态时会一直调用备用方法。
 进入打开状态一定时间后， 进入半打开状态，它会尝试恢复到关闭状态，调用原方法，

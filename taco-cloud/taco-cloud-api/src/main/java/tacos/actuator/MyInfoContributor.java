@@ -1,4 +1,4 @@
-package tacos.config;
+package tacos.actuator;
 
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;
