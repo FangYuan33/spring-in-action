@@ -342,6 +342,68 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "自定义NodeActuator: 添加Note",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"MyNode?\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/actuator/notes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"notes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "自定义NodeActuator: 删除Note",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/actuator/notes?text=MyNode?",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"notes"
+					],
+					"query": [
+						{
+							"key": "text",
+							"value": "MyNode?"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
