@@ -16,7 +16,7 @@ public class MyHealthIndicator implements HealthIndicator {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 
         if (hour > 12) {
-            return Health.outOfService().withDetail("Why", "Hello, I Love My Life!").build();
+            return Health.up().withDetail("Why", "Hello, I Love My Life!").build();
         }
 
         return Health.up().withDetail("Why", "I Love My Work!").build();

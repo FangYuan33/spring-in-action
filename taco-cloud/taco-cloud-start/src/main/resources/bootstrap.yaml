@@ -4,6 +4,10 @@ spring:
   cloud:
     config:
       profile: datasource,local
+  boot:
+    admin:
+      client:
+        url: localhost:9090
 
 # 开放actuator请求路径
 management:

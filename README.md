@@ -6,7 +6,7 @@
 
 添加上SpringAdmin的依赖并添加EnableAdminServer的注解即可启动Admin服务
 
-
+想要被发现的服务添加对应的client依赖并配置admin-server的地址即可
 
 ### chapter_16
 运行中的应用就像包起来的礼物，你可能想摇晃或者掂量它来猜一猜里边儿装的是什么东西，Spring Boot Actuator就提供了这个"透视"的能力。
