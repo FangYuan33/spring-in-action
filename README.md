@@ -2,6 +2,12 @@
 
 **Could not find class**，大概率是Maven版本不行的问题！ 这个bug搞死我了...
 
+### chapter_17
+
+添加上SpringAdmin的依赖并添加EnableAdminServer的注解即可启动Admin服务
+
+
+
 ### chapter_16
 运行中的应用就像包起来的礼物，你可能想摇晃或者掂量它来猜一猜里边儿装的是什么东西，Spring Boot Actuator就提供了这个"透视"的能力。
 我们能够以此来查看应用的行为，健康状况甚至能触发影响它的各种操作。
