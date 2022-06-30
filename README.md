@@ -2,6 +2,12 @@
 
 **Could not find class**，大概率是Maven版本不行的问题！ 这个bug搞死我了...
 
+### chapter_18_19
+
+关于Docker部署，找一本专门的书学一下。
+
+以终为始！
+
 ### chapter_17
 
 添加上SpringAdmin的依赖并添加EnableAdminServer的注解即可启动Admin服务
